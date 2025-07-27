@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivek Kumar | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #00bcd4;
+            --secondary-color: #00796b;
+            --light-color: #f5f5f5;
+            --dark-color: #121212;
+            --accent-color: #ff5722;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--light-color);
+            background-color: var(--dark-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 0.5rem 0;
+        }
+
+        .btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Header & Navigation */
+        .logo-image {
+        width: 1.2cm;
+        height: 1.2cm;
+        border-radius: 10px; /* Rounded corners */
+        object-fit: cover; /* Ensures the image fills the box */
+        }
+
+        header {
+            background: rgba(18, 18, 18, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--light-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .burger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background: var(--light-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('photo1.jpg') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icons {
+            margin: 2rem 0;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+        }
+
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .about-img {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .about-btns {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .experience-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .company-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            background: white;
+            padding: 5px;
+        }
+
+        .experience-title {
+            flex: 1;
+        }
+
+        .experience-title h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-title p {
+            color: #aaa;
+        }
+
+        .experience-details ul {
+            padding-left: 1.5rem;
+        }
+
+        .experience-details li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+            padding: 1.5rem;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .project-card p {
+            margin-bottom: 1.5rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Education Section */
+        .education-item {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-item h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .education-item p {
+            color: #aaa;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .skill-category {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(30, 30, 30, 0.7);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 100%;
+            background: var(--primary-color);
+            border-radius: 5px;
+        }
+
+        /* Hobbies & Achievements */
+        .hobbies-achievements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(700px, 1fr));
+            gap: 2rem;
+        }
+
+        .hobbies, .achievements {
+            background: rgba(30, 30, 30, 0.7);
+            border-radius: 10px;
+            padding: 1.5rem;
+        }
+
+        .hobbies ul, .achievements ul {
+            padding-left: 1.5rem;
+        }
+
+        .hobbies li, .achievements li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-info i {
+            margin-right: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #333;
+            border-radius: 5px;
+            font-family: inherit;
+            background: #333;
+            color: white;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 80px;
+                background: rgba(18, 18, 18, 0.95);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                clip-path: circle(0px at 90% -10%);
+                transition: all 0.5s ease-out;
+                pointer-events: none;
+            }
+
+            .nav-links.active {
+                clip-path: circle(1000px at 90% -10%);
+                pointer-events: all;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .burger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .toggle .line1 {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .toggle .line2 {
+                opacity: 0;
+            }
+            
+            .toggle .line3 {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><img src="VIVEK KUMAR LOGO.png" alt="VIVEK Logo" class="logo-image" /></div>  
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#Achievements">Achievements</a></li>
+                <li><a href="#Hobbies & Interests">Hobbies & Interests</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1><span>Vivek Kumar</span></h1>
+            <p>Computer Science Student | Developer</p>
+            <div class="social-icons">
+                <a href="https://github.com/Vivek15911?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/vivek-kumar-03083130a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com" target="_blank">
+  <i class="fas fa-envelope"></i></a>
+            </div>
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>When I'm not studying, I like experimenting with code, learning new tools, and staying updated with the world of technology.</p>
+                    <div class="about-btns">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="experience-section">
+        <div class="container">
+            <h2>Working Experience</h2>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="TATA STEEL.png" alt="TATA STEEL Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>TATA STEEL</h3>
+                        <p>MAY 2024 – JULY 2024 | OFFLINE</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>Gained hands-on exposure to the ST Mill operations</li>
+                        <li>Understood the complete workflow from raw material Input to final product output.</li>
+                        <li>Learned about industrial machinery, safety procedures, and Production monitoring.</li>
+                        <li>Also saw some basic and important fealty provided by company like AC room in heating section area, safety product like shoes, glass, etc … for free.</li>
+                    </ul>
+                    <a href="TATA STEEL.pdf" class="btn">View Certificate</a>
+                </div>
+            </div>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="AWS.png" alt="AWS Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>Amazon Web Services</h3>
+                        <p>APRIL 2025 – APRIL 2025 | ONLINE</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>Completed AWS ML foundation courses</li>
+                        <li>Learned SageMaker, ML planning, and business use cases.</li>
+                        <li>Gained knowledge of ML workflows and key terms.</li>
+                        <li>How multiple devices are checked and pass the Information through the data base.</li>
+                    </ul>
+                    <a href="aws_certificate.pdf" class="btn">View Certificate</a>
+                </div>
+            </div>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="devtown_in_logo.jpeg" alt="DevTown Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>Dev Town</h3>
+                        <p>JUNE 2025 – 2025 | ONLINE</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>I've completed the "Netflix Clone Using HTML" bootcamp hosted by DevTown</li>
+                        <li>Participated in a bootcamp focused on web development fundamentals.</li>
+                        <li>Built a static Netflix homepage clone using HTML only.</li>
+                        <li>Gained hands-on experience in designing and organizing content.</li>
+                        <li>Certificate issued by DevTown in collaboration with Microsoft Student Chapter.</li>
+                        <li>Improved skills in basic web design and project implementation.</li>
+                    </ul>
+                    <a href="DevTown.pdf" class="btn">View Certificate</a>
+                </div>
+            </div>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="PLASMID.jpeg" alt="Plasmid Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>Plasmid</h3>
+                        <p>MAY 2024 – JULY 2024 | Online</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>Completed a 2-month industrial training and internship at Plasmid Innovation Ltd.</li>
+                        <li>Worked in the domain of Cloud Computing applications.</li>
+                        <li>Gained practical exposure to industry projects and cloud-based solutions.</li>
+                        <li>Delivered assigned work sincerely and met project deadlines.</li>
+                        <li>Developed problem-solving and teamwork skills in a professional environment.</li>
+                        <li>Received a Letter of Recommendation for excellent performance and dedication.</li>
+                    </ul>
+                    <a href="plasmid.pdf" class="btn">View Certificate</a>
+                </div>
+            </div>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="INTERNPE.jpeg" alt="InternPe Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>InternPe</h3>
+                        <p>JUNE 2024 – JULY 2024 | ONLINE</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>Completed a 4-week structured internship in C++ Programming.</li>
+                        <li>Gained hands-on experience in writing efficient, object-oriented C++ code.</li>
+                        <li>Understood core programming concepts such as data structures, memory management, and pointers.</li>
+                        <li>Enhanced problem-solving skills through assigned tasks and programming challenges.</li>
+                        <li>Participated in code reviews and implemented feedback for code improvement.</li>
+                    </ul>
+                    <a href="INTERNPE_OFFEER_LETTER.pdf" class="btn">View Certificate</a>
+                </div>
+            </div>
+            
+            <div class="experience">
+                <div class="experience-header">
+                    <img src="NAUKRI.png" alt="Naukri Logo" class="company-logo">
+                    <div class="experience-title">
+                        <h3>Naukri</h3>
+                        <p>MAY 2024 | Online Exam</p>
+                    </div>
+                </div>
+                <div class="experience-details">
+                    <ul>
+                        <li>Participated in All India NCAT 2025, one of India's largest career aptitude assessments.</li>
+                        <li>Tested on core aptitude areas including quantitative reasoning, logical thinking, verbal ability, and problem-solving.</li>
+                        <li>Gained exposure to industry-level assessment standards recognized by top recruiters and companies.</li>
+                        <li>Got AIR 5264</li>
+                    </ul>
+                    <a href="NAUKRI_CAMPUS.jpg" class="btn">View Certificate</a>
+                    <a href="scorecard.pdf" class="btn">View Score Card</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Portfolio Website</h3>
+                    <p>To create an online space to showcase my skills, projects, and achievements in a clear and professional way.</p>
+                    <p>I designed and coded the entire website myself using HTML and CSS. I planned the layout, wrote the content, and made it responsive for all devices.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Netflix Clone Website</h3>
+                    <p>A static clone of the Netflix homepage built with HTML and CSS.</p>
+                    <div class="project-links">
+                        <a href="https://willowy-palmier-0fc22c.netlify.app/" target="_blank" class="btn">View Project</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="education">
+        <div class="container">
+            <h2>Education</h2>
+            
+            <div class="education-item">
+                <h3>GITA AUTONOMOUS COLLEGE | BHUBANESWAR | INDIA</h3>
+                <p>B.TECH Computer Science and Engineering with AI | 2022 - 2026(On Going)</p>
+                <p>SCGPA - 7.18 (Till 6th semester)</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>NETAJI SUBHAS PUBLIC SCHOOL | JAMSHEDPUR | INDIA</h3>
+                <p>Class (XII th) | 2021 - 2022 | CBSE Board</p>
+                <p>Score - 52.8</p>
+            </div>
+            
+            <div class="education-item">
+                <h3>NETAJI SUBHAS PUBLIC SCHOOL | JAMSHEDPUR | INDIA</h3>
+                <p>Class (X th) | 2019 - 2020 | CBSE Board</p>
+                <p>Score - 61.2</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="skills">
+    <div class="container">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Programming</h3>
+                <div class="skill-icons">
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" title="C">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" title="JavaScript">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" title="CSS">
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <div class="skill-icons">
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" title="Windows">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" title="Linux">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" title="VS Code">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" title="Vercel">
+                    </div>
+                    <div class="skill-icon">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" title="Notion">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .skills-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2rem;
+        justify-content: center;
+    }
+
+    .skill-category {
+        flex: 1;
+        min-width: 300px;
+        background: rgba(30, 30, 30, 0.7);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .skill-icons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .skill-icon {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: transform 0.3s ease;
+    }
+
+    .skill-icon:hover {
+        transform: translateY(-5px);
+    }
+
+    .skill-icon img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        filter: grayscale(20%);
+        transition: filter 0.3s ease;
+    }
+
+    .skill-icon:hover img {
+        filter: grayscale(0%);
+    }
+
+    .skill-icon span {
+        margin-top: 0.5rem;
+        font-size: 0.8rem;
+        color: #aaa;
+    }
+</style>
+
+<script>
+    // Add tooltips to skill icons
+    document.addEventListener('DOMContentLoaded', function() {
+        const skillIcons = document.querySelectorAll('.skill-icon img');
+        
+        skillIcons.forEach(icon => {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = icon.alt;
+            
+            icon.parentElement.appendChild(tooltip);
+            
+            icon.parentElement.addEventListener('mouseenter', function() {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            });
+            
+            icon.parentElement.addEventListener('mouseleave', function() {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            });
+        });
+    });
+</script>
+
+<style>
+    .tooltip {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 100;
+    }
+</style>
+
+    <section id="hobbies" class="hobbies-section">
+        <div class="container">
+            <h2>Hobbies & Interests</h2>
+            <div class="hobbies-achievements">
+                <div class="hobbies">
+                    <ul>
+                        <li>Drawing and sketching</li>
+                        <li>Online gaming</li>
+                        <li>Listening to music</li>
+                        <li>Ensuring cleanliness and maintenance of personal electronics.</li>
+                        <li>Explore new websites for design, good coding website, how cloud computing working in gaming website.</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="Achievements" class="Achievements-section">
+        <div class="container">
+            <h2>Achievements</h2>
+            <div class="hobbies-achievements">
+                <div class="hobbies">
+                    <ul>
+                        <li>Qualified for internal hackathons, showcasing technical, problem-solving, and business innovation skills.</li>
+                        <li>District-level drawing artist and competing with prestigious event.</li>
+                        <li>State-level yoga competitor.</li>
+                        <li>50 LEET CODE completed.</li>
+                        <li>AIR 5264 in All India NCAT</li>
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> vk5400310@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 9470950144</p>
+                    <div class="social-icons">
+                        <a href="https://github.com/Vivek15911?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/vivek-kumar-03083130a/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Vivek Kumar. All rights reserved.</p>
+    </footer>
+
+    
+</body>
+</html>
