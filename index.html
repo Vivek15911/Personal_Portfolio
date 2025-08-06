@@ -84,10 +84,10 @@
 
         /* Header & Navigation */
         .logo-image {
-        width: 1.2cm;
-        height: 1.2cm;
-        border-radius: 10px; /* Rounded corners */
-        object-fit: cover; /* Ensures the image fills the box */
+            width: 1.2cm;
+            height: 1.2cm;
+            border-radius: 10px;
+            object-fit: cover;
         }
 
         header {
@@ -150,14 +150,26 @@
             height: 100vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('photo1.jpg') no-repeat center center/cover;
+            position: relative;
             color: white;
             text-align: center;
             padding-top: 80px;
+            overflow: hidden;
+        }
+
+        #vanta-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
         .hero-content {
             width: 100%;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
@@ -336,23 +348,57 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .skill-item {
-            margin-bottom: 1.5rem;
+        .skill-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
 
-        .skill-bar {
-            width: 100%;
-            height: 10px;
-            background: #333;
-            border-radius: 5px;
+        .skill-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            filter: grayscale(20%);
+            transition: filter 0.3s ease;
+        }
+
+        .skill-icon:hover img {
+            filter: grayscale(0%);
+        }
+
+        .skill-icon span {
             margin-top: 0.5rem;
-            overflow: hidden;
+            font-size: 0.8rem;
+            color: #aaa;
         }
 
-        .skill-level {
-            height: 100%;
-            background: var(--primary-color);
+        .tooltip {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
             border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
         }
 
         /* Hobbies & Achievements */
@@ -479,7 +525,6 @@
     <header>
         <nav>
             <div class="logo"><img src="VIVEK KUMAR LOGO.png" alt="VIVEK Logo" class="logo-image" /></div>  
-
             <ul class="nav-links">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -500,14 +545,14 @@
     </header>
 
     <section id="home" class="hero">
+        <div id="vanta-canvas"></div>
         <div class="hero-content">
             <h1><span>Vivek Kumar</span></h1>
             <p>Computer Science Student | Developer</p>
             <div class="social-icons">
                 <a href="https://github.com/Vivek15911?tab=repositories" target="_blank"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/vivek-kumar-03083130a/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com" target="_blank">
-  <i class="fas fa-envelope"></i></a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=vk5400310@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
             </div>
             <a href="#projects" class="btn">View My Work</a>
         </div>
@@ -700,150 +745,52 @@
     </section>
 
     <section id="skills" class="skills">
-    <div class="container">
-        <h2>Skills</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3>Programming</h3>
-                <div class="skill-icons">
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" title="C">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" title="JavaScript">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" title="CSS">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Programming</h3>
+                    <div class="skill-icons">
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" alt="Python" title="Python">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" alt="C" title="C">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" title="JavaScript">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML" title="HTML">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS" title="CSS">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="skill-category">
-                <h3>Tools & Platforms</h3>
-                <div class="skill-icons">
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" title="Windows">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" title="Linux">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" title="VS Code">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" title="Vercel">
-                    </div>
-                    <div class="skill-icon">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" title="Notion">
+                <div class="skill-category">
+                    <h3>Tools & Platforms</h3>
+                    <div class="skill-icons">
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg" alt="Windows" title="Windows">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="Linux" title="Linux">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" title="VS Code">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png" alt="Vercel" title="Vercel">
+                        </div>
+                        <div class="skill-icon">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" title="Notion">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<style>
-    .skills-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        justify-content: center;
-    }
-
-    .skill-category {
-        flex: 1;
-        min-width: 300px;
-        background: rgba(30, 30, 30, 0.7);
-        padding: 2rem;
-        border-radius: 10px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-
-    .skill-icons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-    }
-
-    .skill-icon {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        transition: transform 0.3s ease;
-    }
-
-    .skill-icon:hover {
-        transform: translateY(-5px);
-    }
-
-    .skill-icon img {
-        width: 50px;
-        height: 50px;
-        object-fit: contain;
-        filter: grayscale(20%);
-        transition: filter 0.3s ease;
-    }
-
-    .skill-icon:hover img {
-        filter: grayscale(0%);
-    }
-
-    .skill-icon span {
-        margin-top: 0.5rem;
-        font-size: 0.8rem;
-        color: #aaa;
-    }
-</style>
-
-<script>
-    // Add tooltips to skill icons
-    document.addEventListener('DOMContentLoaded', function() {
-        const skillIcons = document.querySelectorAll('.skill-icon img');
-        
-        skillIcons.forEach(icon => {
-            const tooltip = document.createElement('div');
-            tooltip.className = 'tooltip';
-            tooltip.textContent = icon.alt;
-            
-            icon.parentElement.appendChild(tooltip);
-            
-            icon.parentElement.addEventListener('mouseenter', function() {
-                tooltip.style.opacity = '1';
-                tooltip.style.visibility = 'visible';
-            });
-            
-            icon.parentElement.addEventListener('mouseleave', function() {
-                tooltip.style.opacity = '0';
-                tooltip.style.visibility = 'hidden';
-            });
-        });
-    });
-</script>
-
-<style>
-    .tooltip {
-        position: absolute;
-        bottom: -30px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 5px 10px;
-        border-radius: 5px;
-        font-size: 0.8rem;
-        white-space: nowrap;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 100;
-    }
-</style>
+    </section>
 
     <section id="hobbies" class="hobbies-section">
         <div class="container">
@@ -858,7 +805,6 @@
                         <li>Explore new websites for design, good coding website, how cloud computing working in gaming website.</li>
                     </ul>
                 </div>
-                
             </div>
         </div>
     </section>
@@ -876,7 +822,6 @@
                         <li>AIR 5264 in All India NCAT</li>
                     </ul>
                 </div>
-                
             </div>
         </div>
     </section>
@@ -893,7 +838,6 @@
                         <a href="https://www.linkedin.com/in/vivek-kumar-03083130a/" target="_blank"><i class="fab fa-linkedin"></i></a>
                     </div>
                 </div>
-                
             </div>
         </div>
     </section>
@@ -902,6 +846,64 @@
         <p>&copy; <span id="year"></span> Vivek Kumar. All rights reserved.</p>
     </footer>
 
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"></script>
+    <script>
+        // Vanta.js Birds Animation for Hero Section
+        VANTA.BIRDS({
+            el: "#vanta-canvas",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0x1d2436,
+            color1: 0xff4500,
+            color2: 0x00b7eb,
+            birdSize: 0.8,
+            wingSpan: 30.00,
+            speedLimit: 5.00,
+            separation: 20.00,
+            alignment: 20.00,
+            cohesion: 20.00,
+            quantity: 4.00
+        });
+
+        // Add tooltips to skill icons
+        document.addEventListener('DOMContentLoaded', function() {
+            const skillIcons = document.querySelectorAll('.skill-icon img');
+            
+            skillIcons.forEach(icon => {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = icon.alt;
+                
+                icon.parentElement.appendChild(tooltip);
+                
+                icon.parentElement.addEventListener('mouseenter', function() {
+                    tooltip.style.opacity = '1';
+                    tooltip.style.visibility = 'visible';
+                });
+                
+                icon.parentElement.addEventListener('mouseleave', function() {
+                    tooltip.style.opacity = '0';
+                    tooltip.style.visibility = 'hidden';
+                });
+            });
+        });
+
+        // Burger menu toggle
+        const burger = document.querySelector('.burger');
+        const navLinks = document.querySelector('.nav-links');
+        burger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            burger.classList.toggle('toggle');
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
